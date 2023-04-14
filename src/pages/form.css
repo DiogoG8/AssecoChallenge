@@ -1,0 +1,56 @@
+.header{
+    background-color: #F8F8F8;
+
+}
+.titletext{
+    color: #00a3e0;
+}
+
+.steps{
+    color:#c5c5c5;
+}
+
+.whitecircle{
+    background-color: #F8F8F8;
+    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid #00a3e0;
+    border-right-color: #e9e6e6;
+    border-bottom-color: #e9e6e6;
+    transform: rotate(136deg);
+    margin-left: 2rem;
+}
+
+.fullcircle{
+    background-color: #F8F8F8;
+    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid #00a3e0;
+    margin-left: 2rem;
+}
+
+.styleinput{
+    border: 2px solid rgb(199, 196, 196);
+}
+
+.texteuro{
+    color: grey;
+}
+
+.bluebutton{
+    background-color: #00a3e0;
+    border-radius: 10%;
+    width: 5rem;
+    color: white;
+}
+
+.whitebutton{
+    background-color: white;
+    border: 2px solid #00a3e0;
+    border-radius: 10%;
+    border-style: solid;
+    width: 5rem;
+    color:#00a3e0;
+}
