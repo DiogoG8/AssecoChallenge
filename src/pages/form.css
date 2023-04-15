@@ -1,18 +1,4 @@
-.header{
-    background-color: #F8F8F8;
 
-}
-.titletext{
-    color: #00a3e0;
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin-top: 1rem;
-}
-
-.steps{
-    color:#c5c5c5;
-    padding-left: 0.5rem;
-}
 
 .whitecircle{
     background-color: #F8F8F8;
@@ -35,13 +21,7 @@
     margin-left: 2rem;
 }
 
-.styleinput{
-    border: 2px solid rgb(199, 196, 196);
-}
 
-.texteuro{
-    color: grey;
-}
 
 .bluebutton{
     background-color: #00a3e0;
