@@ -2,7 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 function Form() {
-  const [state, setState] = useState(true);
+  /*States Used to Work with JS*/
+  const [button, setButton] = useState(true);
   const [errors, setErrors] = useState(true);
   const [account, setAccount] = useState("");
   const [amount, setAmount] = useState("");
@@ -11,17 +12,19 @@ function Form() {
 
   /*RegEx Used to Build Conditions*/
   const amountRegex = /[0-9]/;
-  const destinationRegex = /^PT[0-9]{2}[0-9]{21}$/;
-  const regex1 = /(.{36}) /g;
-  const regex2 = /^0+/;
+  const IBANRegex = /^PT[0-9]{2}[0-9]{21}$/;
+  const descriptionRegex = /(.{36}) /g;
+  const zeroRegex = /^0+/;
 
+  /*useEffect to Clean the "errors" State*/
   useEffect(() => {
     setErrors("");
-    setState(true);
+    setButton(true);
   }, [amount, transfer, account, destination]);
 
-  function amountStep() {
-    setState(!state);
+  /*Next Button Event Handler*/
+  function nextStep() {
+    setButton(!button);
     setErrors(
       <div className="ml-4 text-base">
         &#42; Something is wrong with the information filled. Check the
@@ -29,8 +32,10 @@ function Form() {
       </div>
     );
   }
+
+  /*Back Button Event Handler*/
   function backStep() {
-    setState(!state);
+    setButton(!button);
     setErrors("");
   }
 
@@ -41,13 +46,13 @@ function Form() {
           <div className="text-[#00a3e0] mt-4 font-semibold text-2xl">
             National Transfer
           </div>
-          {state ? (
+          {button ? (
             <div className="mb-4 font-bold text-[#71717a]">Information</div>
           ) : (
             <div className="mb-4 font-bold text-[#71717a]">Summary</div>
           )}
         </div>
-        {state ? (
+        {button ? (
           <div className="flex flex-row-reverse mr-8 items-center">
             <div className="text-[#c5c5c5] pl-2">step 1/2</div>
             <div className="bg-[#F8F8F8] border-solid border-2 border-[#00a3e0] ml-8 w-4 h-4 rounded-full border-r-[#e9e6e6] border-b-[#e9e6e6] rotate-[135deg]"></div>
@@ -60,13 +65,13 @@ function Form() {
         )}
       </header>
       <div className="pl-6 pt-4">
-        {state === true ||
+        {button === true ||
         account === "Choose Account" ||
         amount < 100 ||
         amount > 10000 ||
         transfer.length < 20 ||
         destination.length !== 25 ||
-        !destinationRegex.test(destination) ||
+        !IBANRegex.test(destination) ||
         !amountRegex.test(amount) ? (
           <>
             <div className="mb-6">
@@ -76,7 +81,7 @@ function Form() {
               <select
                 value={account}
                 onChange={(e) => setAccount(e.target.value)}
-                className="border-2 border-[#d1d5db] pl-2 pr-12 w-80 h-8 text-[#71717a]  appearance-none"
+                className="border-2 border-[#d1d5db] pl-2 pr-12 w-80 h-8 text-[#71717a]"
               >
                 <option value="Default" className="text-[#71717a]">
                   Choose Account
@@ -124,7 +129,7 @@ function Form() {
             <div className="flex flex-row items-baseline">
               <button
                 className="bg-[#00a3e0] text-white w-32 h-8 mb-8 rounded font-bold"
-                onClick={amountStep}
+                onClick={nextStep}
               >
                 Next Step
               </button>
@@ -150,16 +155,14 @@ function Form() {
                 Transfer Description
               </div>
               <div className="whitespace-pre-line">
-                {transfer.replace(regex1, "$1\n")}
+                {transfer.replace(descriptionRegex, "$1\n")}
               </div>
             </div>
             <div className="mb-60">
               <div className="font-extrabold text-[#4b5563] mb-1">Amount</div>
               <div className="flex items-center">
-                <div className="text-[#71717a]">
-                  {amount.replace(regex2, "")}
-                </div>
-                <div className="text-[#71717a] pl-1">EUR</div>
+                <div>{amount.replace(zeroRegex, "")}</div>
+                <div className="pl-1">EUR</div>
               </div>
             </div>
             <div className="flex flex-row items-baseline">
