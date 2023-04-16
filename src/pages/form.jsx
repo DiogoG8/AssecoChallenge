@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import "../pages/form.css";
 
 function Form() {
   const [state, setState] = useState(true);
@@ -51,12 +50,12 @@ function Form() {
         {state ? (
           <div className="flex flex-row-reverse mr-8 items-center">
             <div className="text-[#c5c5c5] pl-2">step 1/2</div>
-            <div className="whitecircle"></div>
+            <div className="bg-[#F8F8F8] border-solid border-2 border-[#00a3e0] ml-8 w-4 h-4 rounded-full border-r-[#e9e6e6] border-b-[#e9e6e6] rotate-[135deg]"></div>
           </div>
         ) : (
           <div className="flex flex-row-reverse mr-8 items-center">
             <div className="text-[#c5c5c5] pl-2">step 2/2</div>
-            <div className="fullcircle"></div>
+            <div className="bg-[#F8F8F8] border-solid border-2 border-[#00a3e0] ml-8 w-4 h-4 rounded-full"></div>
           </div>
         )}
       </header>
@@ -104,7 +103,7 @@ function Form() {
               </div>
               <textarea
                 wrap="hard"
-                placeholder="Description between 20 to 70 letters"
+                placeholder="Description (at least 20 letters)"
                 className="border-2 border-[#d1d5db] w-72 pl-2 pr-2 pt-2 pb-24 resize-none break-words "
                 value={transfer}
                 onChange={(e) => setTransfer(e.target.value)}
@@ -123,7 +122,10 @@ function Form() {
               </div>
             </div>
             <div className="flex flex-row items-baseline">
-              <button className="bluebutton" onClick={amountStep}>
+              <button
+                className="bg-[#00a3e0] text-white w-32 h-8 mb-8 rounded font-bold"
+                onClick={amountStep}
+              >
                 Next Step
               </button>
               {errors}
@@ -162,10 +164,15 @@ function Form() {
             </div>
             <div className="flex flex-row items-baseline">
               <>
-                <button className="whitebutton" onClick={backStep}>
+                <button
+                  className="bg-white text-[#00a3e0] w-32 h-8  mr-4 rounded border-solid border-2 border-[#00a3e0] font-bold"
+                  onClick={backStep}
+                >
                   Back
                 </button>
-                <button className="bluebutton">Confirm</button>
+                <button className="bg-[#00a3e0] text-white w-32 h-8 mb-8 rounded font-bold">
+                  Confirm
+                </button>
               </>
             </div>
           </>
