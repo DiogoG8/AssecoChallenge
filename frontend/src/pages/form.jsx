@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 function Form() {
   /*States Used to Work with JS*/
@@ -7,7 +8,7 @@ function Form() {
   const [errors, setErrors] = useState(true);
   const [account, setAccount] = useState("");
   const [amount, setAmount] = useState("");
-  const [transfer, setTransfer] = useState("");
+  const [description, setDescription] = useState("");
   const [destination, setDestination] = useState("");
 
   /*RegEx Used to Build Conditions*/
@@ -20,7 +21,7 @@ function Form() {
   useEffect(() => {
     setErrors("");
     setButton(true);
-  }, [amount, transfer, account, destination]);
+  }, [amount, description, account, destination]);
 
   /*Next Button Event Handler*/
   function nextStep() {
@@ -37,6 +38,22 @@ function Form() {
   function backStep() {
     setButton(!button);
     setErrors("");
+  }
+
+  /*EXTRA - POST Mechanism*/
+  function postingTransfer(event) {
+    event.preventDefault();
+    axios
+      .post("http://localhost:5000/api/transfers", {
+        description,
+        destination,
+        account,
+        amount,
+      })
+      .then((response) => response.data)
+      .then((data) => {
+        console.log(data);
+      });
   }
 
   return (
@@ -69,7 +86,7 @@ function Form() {
         account === "Choose Account" ||
         amount < 100 ||
         amount > 10000 ||
-        transfer.length < 20 ||
+        description.length < 20 ||
         destination.length !== 25 ||
         !IBANRegex.test(destination) ||
         !amountRegex.test(amount) ? (
@@ -83,10 +100,8 @@ function Form() {
                 onChange={(e) => setAccount(e.target.value)}
                 className="border-2 border-[#d1d5db] pl-2 pr-12 w-80 h-8 text-[#71717a]"
               >
-                <option value="Default" className="text-[#71717a]">
-                  Choose Account
-                </option>
-                <option value="My Account" className="text-[#71717a]">
+                <option className="text-[#71717a]">Choose Account</option>
+                <option className="text-[#71717a]">
                   My Account - 999403020030
                 </option>
               </select>
@@ -110,8 +125,8 @@ function Form() {
                 wrap="hard"
                 placeholder="Description (at least 20 letters)"
                 className="border-2 border-[#d1d5db] w-72 pl-2 pr-2 pt-2 pb-24 resize-none break-words "
-                value={transfer}
-                onChange={(e) => setTransfer(e.target.value)}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
               ></textarea>
             </div>
             <div className="mb-60">
@@ -155,7 +170,7 @@ function Form() {
                 Transfer Description
               </div>
               <div className="whitespace-pre-line">
-                {transfer.replace(descriptionRegex, "$1\n")}
+                {description.replace(descriptionRegex, "$1\n")}
               </div>
             </div>
             <div className="mb-60">
@@ -173,7 +188,10 @@ function Form() {
                 >
                   Back
                 </button>
-                <button className="bg-[#00a3e0] text-white w-32 h-8 mb-8 rounded font-bold">
+                <button
+                  className="bg-[#00a3e0] text-white w-32 h-8 mb-8 rounded font-bold"
+                  onClick={postingTransfer}
+                >
                   Confirm
                 </button>
               </>
