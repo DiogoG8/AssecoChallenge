@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { OkPacket, RowDataPacket } from "mysql2";
+import { OkPacket } from "mysql2";
 import database from "../database"
 
 export interface ExpectedSQLResult extends OkPacket {
@@ -18,7 +18,7 @@ export const submitTransferInfo: RequestHandler<{
 
     database
     .query<ExpectedSQLResult>(
-        "INSERT INTO contact_us (account, description, destination, amount) VALUES (?, ?, ?, ?)",
+        "INSERT INTO form (account, description, destination, amount) VALUES (?, ?, ?, ?)",
         [account, description, destination, amount])
     .then(([result]) => {
        if(result.affectedRows === 0) {
