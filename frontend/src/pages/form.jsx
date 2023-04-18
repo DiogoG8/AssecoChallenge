@@ -5,6 +5,7 @@ import axios from "axios";
 function Form() {
   /*States Used to Work with JS*/
   const [button, setButton] = useState(true);
+  const [confirmbutton, setConfirmbutton] = useState(true);
   const [errors, setErrors] = useState(true);
   const [account, setAccount] = useState("");
   const [amount, setAmount] = useState("");
@@ -26,6 +27,7 @@ function Form() {
   /*Next Button Event Handler*/
   function nextStep() {
     setButton(!button);
+    setConfirmbutton(!confirmbutton);
     setErrors(
       <div className="ml-4 text-base">
         &#42; Something is wrong with the information filled. Check the
@@ -36,7 +38,7 @@ function Form() {
 
   /*Back Button Event Handler*/
   function backStep() {
-    setButton(!button);
+    setButton(true);
     setErrors("");
   }
 
@@ -54,6 +56,8 @@ function Form() {
       .then((data) => {
         console.log(data);
       });
+    setConfirmbutton(true);
+    setErrors("");
   }
 
   return (
@@ -82,7 +86,7 @@ function Form() {
         )}
       </header>
       <div className="pl-6 pt-4">
-        {button === true ||
+        {(button === true && confirmbutton === true) ||
         account === "Choose Account" ||
         amount < 100 ||
         amount > 10000 ||
@@ -151,7 +155,7 @@ function Form() {
               {errors}
             </div>
           </>
-        ) : (
+        ) : button === false && confirmbutton === false ? (
           <>
             <div className="mb-6">
               <div className="font-extrabold text-[#4b5563] mb-1">
@@ -197,6 +201,21 @@ function Form() {
               </>
             </div>
           </>
+        ) : button === false && confirmbutton === true ? (
+          <>
+            <div> Your transfer has been done!</div>
+            <div>
+              For more information contact us via email or phone number!
+            </div>
+            <button
+              className="bg-white text-[#00a3e0] w-32 h-8  mr-4 rounded border-solid border-2 border-[#00a3e0] font-bold"
+              onClick={backStep}
+            >
+              Back
+            </button>
+          </>
+        ) : (
+          ""
         )}
       </div>
     </body>
