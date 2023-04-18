@@ -22,6 +22,7 @@ function Form() {
   useEffect(() => {
     setErrors("");
     setButton(true);
+    setConfirmbutton(true);
   }, [amount, description, account, destination]);
 
   /*Next Button Event Handler*/
@@ -39,6 +40,7 @@ function Form() {
   /*Back Button Event Handler*/
   function backStep() {
     setButton(true);
+    setConfirmbutton(true);
     setErrors("");
   }
 
@@ -67,7 +69,14 @@ function Form() {
           <div className="text-[#00a3e0] mt-4 font-semibold text-2xl">
             National Transfer
           </div>
-          {button === true && confirmbutton === true ? (
+          {(button === true && confirmbutton === true) ||
+          account === "Choose Account" ||
+          amount < 100 ||
+          amount > 10000 ||
+          description.length < 20 ||
+          destination.length !== 25 ||
+          !IBANRegex.test(destination) ||
+          !amountRegex.test(amount) ? (
             <div className="mb-4 font-bold text-[#71717a]">Information</div>
           ) : button === false && confirmbutton === false ? (
             <div className="mb-4 font-bold text-[#71717a]">Summary</div>
@@ -77,7 +86,14 @@ function Form() {
             </div>
           )}
         </div>
-        {button === true && confirmbutton === true ? (
+        {(button === true && confirmbutton === true) ||
+        account === "Choose Account" ||
+        amount < 100 ||
+        amount > 10000 ||
+        description.length < 20 ||
+        destination.length !== 25 ||
+        !IBANRegex.test(destination) ||
+        !amountRegex.test(amount) ? (
           <div className="flex flex-row-reverse mr-8 items-center">
             <div className="text-[#c5c5c5] pl-2">step 1/2</div>
             <div className="bg-[#F8F8F8] border-solid border-2 border-[#00a3e0] ml-8 w-4 h-4 rounded-full border-r-[#e9e6e6] border-b-[#e9e6e6] rotate-[135deg]"></div>
