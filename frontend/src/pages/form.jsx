@@ -30,7 +30,7 @@ function Form() {
     setButton(!button);
     setConfirmbutton(!confirmbutton);
     setErrors(
-      <div className="ml-4 text-base">
+      <div className="ml-4 text-base max-[600px]:text-sm max-[600px]:mb-4 max-[600px]:text-center max-[600px]:ml-2 max-[600px]:mr-2">
         &#42; Something is wrong with the information filled. Check the
         information provided.
       </div>
@@ -179,7 +179,7 @@ function Form() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-row items-baseline">
+            <div className="flex flex-row items-baseline max-[600px]:flex-col max-[600px]:items-center">
               <button
                 className="bg-[#00a3e0] text-white w-32 h-8 mb-8 rounded font-bold max-[600px]:text-sm max-[600px]:w-24"
                 onClick={nextStep}
