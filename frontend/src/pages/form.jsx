@@ -115,7 +115,7 @@ function Form() {
           ""
         )}
       </header>
-      <div className="pl-6 pt-4 max-[600px]:flex flex-col items-center max-[600px]:pl-0 max-[600px]:pt-6">
+      <div className="pl-6 pt-4 max-[600px]:flex flex-col items-center max-[600px]:pl-0 max-[600px]:pt-6 max-[600px]:text-sm">
         {(button === true && confirmbutton === true) ||
         account === "Choose Account" ||
         amount < 100 ||
@@ -126,13 +126,13 @@ function Form() {
         !amountRegex.test(amount) ? (
           <>
             <div className="mb-6">
-              <div className="font-extrabold text-[#4b5563] mb-1 max-[600px]:text-sm">
+              <div className="font-extrabold text-[#4b5563] mb-1">
                 Origin Account
               </div>
               <select
                 value={account}
                 onChange={(e) => setAccount(e.target.value)}
-                className="border-2 border-[#d1d5db] pl-2 pr-12 w-80 h-8 text-[#71717a] max-[600px]:w-60 max-[600px]:text-sm"
+                className="border-2 border-[#d1d5db] pl-2 pr-12 w-80 h-8 text-[#71717a] max-[600px]:w-60"
               >
                 <option className="text-[#71717a]">Choose Account</option>
                 <option className="text-[#71717a]">
@@ -141,47 +141,45 @@ function Form() {
               </select>
             </div>
             <div className="mb-6">
-              <div className="font-extrabold text-[#4b5563] mb-1 max-[600px]:text-sm">
+              <div className="font-extrabold text-[#4b5563] mb-1">
                 Destination IBAN
               </div>
               <input
                 placeholder="IBAN (Portugal Standards)"
-                className="border-2 border-[#d1d5db]  pl-2 pr-2 w-80 h-8 max-[600px]:w-60 max-[600px]:text-sm"
+                className="border-2 border-[#d1d5db]  pl-2 pr-2 w-80 h-8 max-[600px]:w-60"
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
               ></input>
             </div>
             <div className="mb-6">
-              <div className="font-extrabold text-[#4b5563] mb-1 max-[600px]:text-sm">
+              <div className="font-extrabold text-[#4b5563] mb-1">
                 Transfer Description
               </div>
               <textarea
                 wrap="hard"
                 placeholder="Description (at least 20 letters)"
-                className="border-2 border-[#d1d5db] w-72 pl-2 pr-2 pt-2 pb-24 resize-none break-words max-[600px]:w-60 max-[600px]:text-sm"
+                className="border-2 border-[#d1d5db] w-72 pl-2 pr-2 pt-2 pb-24 resize-none break-words max-[600px]:w-60"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
             </div>
             <div className="mb-60 max-[600px]:mb-20">
-              <div className="font-extrabold text-[#4b5563] mb-1 max-[600px]:text-sm">
-                Amount
-              </div>
+              <div className="font-extrabold text-[#4b5563] mb-1 ">Amount</div>
               <div className="flex items-center">
                 <input
                   placeholder="100€ - 10000€"
-                  className="border-2 border-[#d1d5db] pl-2 pr-2 h-8 max-[600px]:text-sm"
+                  className="border-2 border-[#d1d5db] pl-2 pr-2 h-8 "
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                 ></input>
-                <div className="text-[#71717a] pl-4 font-bold max-[600px]:text-sm max-[600px]:pl-2">
+                <div className="text-[#71717a] pl-4 font-bold max-[600px]:pl-2">
                   EUR
                 </div>
               </div>
             </div>
             <div className="flex flex-row items-baseline max-[600px]:flex-col max-[600px]:items-center">
               <button
-                className="bg-[#00a3e0] text-white w-32 h-8 mb-8 rounded font-bold max-[600px]:text-sm max-[600px]:w-24"
+                className="bg-[#00a3e0] text-white w-32 h-8 mb-8 rounded font-bold max-[600px]:w-24"
                 onClick={nextStep}
               >
                 Next Step
@@ -191,45 +189,43 @@ function Form() {
           </>
         ) : button === false && confirmbutton === false ? (
           <>
-            <div className="mb-6 max-[600px]:text-sm">
-              <div className="font-extrabold text-[#4b5563] mb-1 max-[600px]:text-sm max-[600px]:mt-8">
+            <div className="mb-6">
+              <div className="font-extrabold text-[#4b5563] mb-1 max-[600px]:mt-8">
                 Origin Account
               </div>
               <div>{account}</div>
             </div>
-            <div className="mb-6 max-[600px]:text-sm">
-              <div className="font-extrabold text-[#4b5563] mb-1 max-[600px]:text-sm">
+            <div className="mb-6">
+              <div className="font-extrabold text-[#4b5563] mb-1">
                 Destination IBAN
               </div>
               <div>{destination}</div>
             </div>
-            <div className="mb-6 max-[600px]:text-sm">
-              <div className="font-extrabold text-[#4b5563] mb-1 max-[600px]:text-sm">
+            <div className="mb-6">
+              <div className="font-extrabold text-[#4b5563] mb-1">
                 Transfer Description
               </div>
-              <div className="whitespace-pre-line max-[600px]:text-sm">
+              <div className="whitespace-pre-line">
                 {description.replace(descriptionRegex, "$1\n")}
               </div>
             </div>
-            <div className="mb-60 max-[600px]:text-sm max-[600px]:mb-24">
-              <div className="font-extrabold text-[#4b5563] mb-1 max-[600px]:text-sm">
-                Amount
-              </div>
-              <div className="flex items-center max-[600px]:text-sm">
+            <div className="mb-60 max-[600px]:mb-24">
+              <div className="font-extrabold text-[#4b5563] mb-1">Amount</div>
+              <div className="flex items-center">
                 <div>{amount.replace(zeroRegex, "")}</div>
-                <div className="pl-1 max-[600px]:text-sm">EUR</div>
+                <div className="pl-1">EUR</div>
               </div>
             </div>
             <div className="flex flex-row items-baseline max-[600px]:flex-col">
               <>
                 <button
-                  className="bg-white text-[#00a3e0] w-32 h-8  mr-4 rounded border-solid border-2 border-[#00a3e0] font-bold max-[600px]:text-sm max-[600px]:w-24 max-[600px]:mb-2 max-[600px]:mr-0"
+                  className="bg-white text-[#00a3e0] w-32 h-8  mr-4 rounded border-solid border-2 border-[#00a3e0] font-bold max-[600px]:w-24 max-[600px]:mb-2 max-[600px]:mr-0"
                   onClick={backStep}
                 >
                   Back
                 </button>
                 <button
-                  className="bg-[#00a3e0] text-white w-32 h-8 mb-8 rounded font-bold max-[600px]:text-sm max-[600px]:w-24"
+                  className="bg-[#00a3e0] text-white w-32 h-8 mb-8 rounded font-bold max-[600px]:w-24"
                   onClick={postingTransfer}
                 >
                   Confirm
@@ -239,14 +235,14 @@ function Form() {
           </>
         ) : button === false && confirmbutton === true ? (
           <>
-            <div className="font-extrabold text-[#4b5563] max-[600px]:text-sm max-[600px]:mt-8">
+            <div className="font-extrabold text-[#4b5563] max-[600px]:mt-8">
               Your transfer has been done!
             </div>
-            <div className="max-[600px]:text-sm max-[600px]:text-center max-[600px]:mt-2 max-[600px]:pl-6 max-[600px]:pr-6">
+            <div className="max-[600px]:text-center max-[600px]:mt-2 max-[600px]:pl-6 max-[600px]:pr-6">
               For more information contact us via email or phone number!
             </div>
             <button
-              className="bg-white text-[#00a3e0] w-32 h-8  mr-4 rounded border-solid border-2 border-[#00a3e0] font-bold mt-[472px] max-[600px]:text-sm max-[600px]:w-24 max-[600px]:mt-[316px] max-[600px]:mr-0"
+              className="bg-white text-[#00a3e0] w-32 h-8  mr-4 rounded border-solid border-2 border-[#00a3e0] font-bold mt-[472px] max-[600px]:w-24 max-[600px]:mt-[316px] max-[600px]:mr-0"
               onClick={backStep}
             >
               Back
